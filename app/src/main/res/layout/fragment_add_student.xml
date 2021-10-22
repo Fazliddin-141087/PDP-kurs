@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddStudentFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_add_student"
+        android:layout_width="match_parent"
+        app:navigationIcon="@drawable/ic_vector__2_"
+        app:titleTextColor="@color/white"
+        app:title="Talaba qo'shish"
+        android:layout_height="?actionBarSize"
+        android:background="@color/blue_dark"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:inputType="textCapSentences"
+        android:id="@+id/student_surname"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/edit_style"
+        android:hint="Familyasi"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/student_name"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tool_add_student"
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <EditText
+        android:inputType="textCapSentences"
+        android:id="@+id/student_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
+        android:hint="Ismi"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/student_father_name"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_surname"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <EditText
+        android:inputType="textCapSentences"
+        android:id="@+id/student_father_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
+        android:hint="Otasining ismi"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/student_date"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_name"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <TextView
+        android:id="@+id/student_date"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
+        android:drawableRight="@drawable/ic_vectorkalendar"
+        android:hint="18/10/2021"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/student_mentors_spinner"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_father_name"
+        app:layout_constraintWidth_percent="0.75"
+        android:drawableEnd="@drawable/ic_vectorkalendar"/>
+
+    <Spinner
+        android:id="@+id/student_mentors_spinner"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
+        app:layout_constraintBottom_toTopOf="@id/student_groups_spinner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_date"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <Spinner
+        android:id="@+id/student_groups_spinner"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
+        app:layout_constraintBottom_toTopOf="@id/student_save_btn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_mentors_spinner"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <Button
+        android:id="@+id/student_save_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_style"
+        android:text="Saqlash"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

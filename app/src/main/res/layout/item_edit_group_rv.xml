@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp"
+    app:cardCornerRadius="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/group_name_update"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/edit_style"
+            android:inputType="textCapSentences"
+            android:padding="10dp"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/mentor_name_spinner_update"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/edit_style"
+            android:padding="10dp"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/time_spinner_update"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/edit_style"
+            android:padding="10dp"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

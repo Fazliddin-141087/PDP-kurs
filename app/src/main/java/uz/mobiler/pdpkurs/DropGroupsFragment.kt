@@ -1,0 +1,220 @@
+package uz.mobiler.pdpkurs
+
+import android.app.AlertDialog
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import uz.mobiler.pdpkurs.adapters.GroupRvAdapter
+import uz.mobiler.pdpkurs.adapters.MentorSpinnerAdapter
+import uz.mobiler.pdpkurs.adapters.TimeSpinnerAdapter
+import uz.mobiler.pdpkurs.databinding.FragmentDropGroupsBinding
+import uz.mobiler.pdpkurs.databinding.ItemEditGroupBinding
+import uz.mobiler.pdpkurs.db.DbHelper
+import uz.mobiler.pdpkurs.models.Course
+import uz.mobiler.pdpkurs.models.Group
+import uz.mobiler.pdpkurs.models.Mentor
+
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [DropGroupsFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class DropGroupsFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: Course? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getSerializable(ARG_PARAM1) as Course
+        }
+    }
+
+    lateinit var binding: FragmentDropGroupsBinding
+    lateinit var grouoRvAdapter: GroupRvAdapter
+    lateinit var dbHelper: DbHelper
+    lateinit var groupList: ArrayList<Group>
+    lateinit var mentorSpinnerAdapter: MentorSpinnerAdapter
+    lateinit var timeSpinnerAdapter: TimeSpinnerAdapter
+    lateinit var timeList: ArrayList<String>
+    lateinit var mentorList: ArrayList<Mentor>
+    lateinit var mList: ArrayList<Mentor>
+    lateinit var gList:ArrayList<Group>
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentDropGroupsBinding.inflate(layoutInflater, container, false)
+
+        dbHelper = DbHelper(binding.root.context)
+
+        gList= ArrayList()
+
+        groupList = dbHelper.getAllGroups()
+
+        if (groupList.isNotEmpty()){
+            for (group in groupList) {
+                if (group.course?.name==param1?.name && group.isOpened=="open"){
+                    gList.add(group)
+                }
+            }
+        }
+
+        timeList = ArrayList()
+
+        timeList.add("16:30 - 18:30")
+        timeList.add("19:00 - 21:00")
+
+        grouoRvAdapter = GroupRvAdapter(gList)
+        binding.group1Rv.adapter = grouoRvAdapter
+
+        grouoRvAdapter.setMyOnItemClick(object : GroupRvAdapter.MyOnItemClickListener {
+            override fun myOnItemClick(group: Group, position: Int) {
+                var bundle = Bundle()
+                bundle.putSerializable("group", group)
+                bundle.putInt("post", position)
+                findNavController().navigate(R.id.groupReultFragment, bundle)
+            }
+        })
+
+        mList = ArrayList()
+        mentorList = dbHelper.getAllMentors()
+
+
+        grouoRvAdapter.setEditOnClick(object : GroupRvAdapter.EditItemOnClickListener {
+            override fun editOnItemClick(group: Group, position: Int) {
+
+                var alertDialog = AlertDialog.Builder(binding.root.context)
+                var dialogView = ItemEditGroupBinding.inflate(LayoutInflater.from(binding.root.context), null, false)
+
+                if (mentorList.isNotEmpty()){
+                    for (mentor in mentorList) {
+                        if (mentor.course?.name == param1?.name) {
+                            mList.add(mentor)
+                        }
+                    }
+                }else{
+                    Toast.makeText(binding.root.context, "Bu ${param1?.name} kursga Mentor qo'shing!!!", Toast.LENGTH_SHORT).show()
+                }
+
+                mentorSpinnerAdapter = MentorSpinnerAdapter(mList)
+                dialogView.mentorNameSpinner.adapter = mentorSpinnerAdapter
+
+                timeSpinnerAdapter = TimeSpinnerAdapter(timeList)
+                dialogView.groupTimeSpinner.adapter = timeSpinnerAdapter
+
+                dialogView.groupNameEt.setText(group.name)
+                var indexMentor=-1
+                for (i in 0 until mList.size){
+                    if (mList[i].name==group.mentor?.name){
+                        indexMentor=i
+                        break
+                    }
+                }
+
+                dialogView.mentorNameSpinner.setSelection(indexMentor)
+
+                var indexTime=-1
+                for (i in 0 until timeList.size){
+                    if (timeList[i]==group.time){
+                        indexTime=i
+                        break
+                    }
+                }
+                dialogView.groupTimeSpinner.setSelection(indexTime)
+
+                alertDialog.setNegativeButton(
+                    "Yopish"
+                ) { p0, p1 ->
+                    alertDialog.create().dismiss()
+                }
+                alertDialog.setPositiveButton(
+                    "O'zgartirish"
+                ) { p0, p1 ->
+                    val name = dialogView.groupNameEt.text.toString().trim()
+                    val mentor = mList[dialogView.mentorNameSpinner.selectedItemPosition]
+                    val time = timeList[dialogView.groupTimeSpinner.selectedItemPosition]
+                    if (name.isNotEmpty() && mentor!=null && time.isNotEmpty()){
+                        group.name = dialogView.groupNameEt.text.toString().trim()
+                        group.mentor=mList[dialogView.mentorNameSpinner.selectedItemPosition]
+                        group.time=timeList[dialogView.groupTimeSpinner.selectedItemPosition]
+                        dbHelper.updateGroups(group)
+                        gList[position]=group
+                        grouoRvAdapter.notifyDataSetChanged()
+                    }else{
+                        Toast.makeText(binding.root.context, "Iltimos bo'sh maydonlarni to'ldiring", Toast.LENGTH_SHORT).show()
+                    }
+
+                    alertDialog.create().dismiss()
+                }
+
+                alertDialog.setView(dialogView.root)
+                alertDialog.show()
+            }
+        })
+
+        grouoRvAdapter.setDeleteOnClick(object : GroupRvAdapter.DeleteItemOnClickListener {
+            override fun deleteOnItemClick(group: Group, position: Int) {
+                var alertDialog = AlertDialog.Builder(binding.root.context)
+                alertDialog.setTitle("")
+                alertDialog.setMessage("Ushbu guruhni\n o'chirmoqchimisiz?")
+
+                alertDialog.setPositiveButton(
+                    "Ha"
+                ) { p0, p1 ->
+                    dbHelper.deleteGroups(group)
+                    gList.remove(group)
+                    grouoRvAdapter.notifyItemRemoved(position)
+                    grouoRvAdapter.notifyItemRangeChanged(position, gList.size)
+                    alertDialog.create().dismiss()
+                }
+
+                alertDialog.setNegativeButton("Yo'q"
+                ) { p0, p1 -> alertDialog.create().dismiss() }
+                alertDialog.show()
+            }
+        })
+
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        groupList.clear()
+        groupList=dbHelper.getAllGroups()
+        gList.clear()
+        for (group in groupList) {
+            if (group.course?.name==param1?.name && group.isOpened=="open"){
+                gList.add(group)
+            }
+        }
+        grouoRvAdapter.notifyDataSetChanged()
+    }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment DropGroupsFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: Course) =
+            DropGroupsFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARG_PARAM1, param1)
+                }
+            }
+    }
+}

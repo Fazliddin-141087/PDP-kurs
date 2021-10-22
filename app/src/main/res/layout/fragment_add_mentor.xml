@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddMentorFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_add_mentor"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:navigationIcon="@drawable/ic_vector__2_"
+        app:titleTextColor="@color/white"
+        app:title="Yangi mentor qo'shish"
+        android:background="@color/blue_dark"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:inputType="textCapSentences"
+        android:id="@+id/mentor_surname_et"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/edit_style"
+        android:hint="Familyasi"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/mentor_name_et"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tool_add_mentor"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <EditText
+        android:inputType="textCapSentences"
+        android:id="@+id/mentor_name_et"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_style"
+        android:hint="Ismi"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/mentor_father_name_et"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mentor_surname_et"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <EditText
+        android:inputType="textCapSentences"
+        android:id="@+id/mentor_father_name_et"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_style"
+        android:hint="Otasining ismi"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mentor_name_et"
+        app:layout_constraintWidth_percent="0.75" />
+
+
+    <Button
+        android:id="@+id/add_mentor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_style"
+        android:text="Qo'shish"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.075"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

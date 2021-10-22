@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uz.mobiler.pdpkurs.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_courseFragment"
+            app:destination="@id/courseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="uz.mobiler.pdpkurs.CourseFragment"
+        android:label="fragment_course"
+        tools:layout="@layout/fragment_course" >
+        <action
+            android:id="@+id/action_courseFragment_to_courseResultFragment"
+            app:destination="@id/courseResultFragment" />
+        <action
+            android:id="@+id/action_courseFragment_to_groupFragment"
+            app:destination="@id/groupFragment" />
+        <action
+            android:id="@+id/action_courseFragment_to_mentorsFragment"
+            app:destination="@id/mentorsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseResultFragment"
+        android:name="uz.mobiler.pdpkurs.CourseResultFragment"
+        android:label="fragment_course_result"
+        tools:layout="@layout/fragment_course_result" >
+        <action
+            android:id="@+id/action_courseResultFragment_to_addStudentFragment"
+            app:destination="@id/addStudentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStudentFragment"
+        android:name="uz.mobiler.pdpkurs.AddStudentFragment"
+        android:label="fragment_add_student"
+        tools:layout="@layout/fragment_add_student" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="uz.mobiler.pdpkurs.GroupFragment"
+        android:label="fragment_group"
+        tools:layout="@layout/fragment_group" >
+        <action
+            android:id="@+id/action_groupFragment_to_dropGroupsFragment"
+            app:destination="@id/dropGroupsFragment" />
+        <action
+            android:id="@+id/action_groupFragment_to_dropDownGroupsFragment"
+            app:destination="@id/dropDownGroupsFragment" />
+        <action
+            android:id="@+id/action_groupFragment_to_newAddGroupFragment"
+            app:destination="@id/newAddGroupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dropGroupsFragment"
+        android:name="uz.mobiler.pdpkurs.DropGroupsFragment"
+        android:label="fragment_drop_groups"
+        tools:layout="@layout/fragment_drop_groups" >
+        <action
+            android:id="@+id/action_dropGroupsFragment_to_groupReultFragment"
+            app:destination="@id/groupReultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dropDownGroupsFragment"
+        android:name="uz.mobiler.pdpkurs.DropDownGroupsFragment"
+        android:label="fragment_drop_down_groups"
+        tools:layout="@layout/fragment_drop_down_groups" >
+        <action
+            android:id="@+id/action_dropDownGroupsFragment_to_groupReultFragment"
+            app:destination="@id/groupReultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newAddGroupFragment"
+        android:name="uz.mobiler.pdpkurs.NewAddGroupFragment"
+        android:label="fragment_new_add_group"
+        tools:layout="@layout/fragment_new_add_group" />
+    <fragment
+        android:id="@+id/groupReultFragment"
+        android:name="uz.mobiler.pdpkurs.GroupResultFragment"
+        android:label="fragment_group_reult"
+        tools:layout="@layout/fragment_group_result" >
+        <action
+            android:id="@+id/action_groupReultFragment_to_addGroupStudentsFragment"
+            app:destination="@id/addGroupStudentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addGroupStudentsFragment"
+        android:name="uz.mobiler.pdpkurs.AddGroupStudentsFragment"
+        android:label="fragment_add_group_students"
+        tools:layout="@layout/fragment_add_group_students" />
+    <fragment
+        android:id="@+id/addMentorFragment"
+        android:name="uz.mobiler.pdpkurs.AddMentorFragment"
+        android:label="fragment_add_mentor"
+        tools:layout="@layout/fragment_add_mentor" />
+    <fragment
+        android:id="@+id/mentorsFragment"
+        android:name="uz.mobiler.pdpkurs.MentorsFragment"
+        android:label="fragment_mentors"
+        tools:layout="@layout/fragment_mentors" >
+        <action
+            android:id="@+id/action_mentorsFragment_to_addMentorFragment"
+            app:destination="@id/addMentorFragment" />
+    </fragment>
+</navigation>
